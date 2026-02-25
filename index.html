@@ -142,6 +142,8 @@
             state: '{{STATE}}',
             phone: '{{PHONE}}',
             email: '{{EMAIL}}',
+            address: '{{ADDRESS}}',
+            mapSrc: '{{MAP_EMBED_URL}}',
         };
         const YEAR = new Date().getFullYear();
         // ──────────────────────────────────────────────────────────────────────
@@ -490,6 +492,67 @@
                                 </div>
                             </div>
                         </div>
+
+                        {/* ── Get In Touch subsection ── */}
+                        <div className="mt-20 pt-6">
+                            <div className="max-w-6xl mx-auto">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+                                    {/* Left: contact info */}
+                                    <div>
+                                        <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: '#2563EB' }}>Contact Us</span>
+                                        <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mt-2 mb-4">
+                                            Get In{' '}<span style={{ color: '#2563EB' }}>Touch</span>{' '}With Us
+                                        </h2>
+                                        <p className="text-slate-500 text-base leading-relaxed mb-8">
+                                            Have questions or need assistance with your house cleaning needs? Our friendly team is ready to provide you with the information and support you need.
+                                        </p>
+                                        <ul className="space-y-5">
+                                            <li className="flex items-center gap-3">
+                                                <span className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-white btn-primary">
+                                                    <IMail />
+                                                </span>
+                                                <a href={'mailto:' + T.email} className="text-slate-700 hover:text-blue-600 transition text-sm font-medium">{T.email}</a>
+                                            </li>
+                                            <li className="flex items-center gap-3">
+                                                <span className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-white btn-primary">
+                                                    <IPhone />
+                                                </span>
+                                                <a href={'tel:' + T.phone} className="text-slate-700 hover:text-blue-600 transition text-sm font-medium">{T.phone}</a>
+                                            </li>
+                                            <li className="flex items-start gap-3">
+                                                <span className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-white btn-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-5 h-5">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                                    </svg>
+                                                </span>
+                                                <span className="text-slate-700 text-sm font-medium">{T.address}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    {/* Right: map */}
+                                    <div className="rounded-2xl overflow-hidden shadow-md border border-slate-100" style={{ height: '320px' }}>
+                                        {/* Replace T.mapSrc with a real Google Maps embed URL:
+                                             https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE
+                                             Get it from: maps.google.com → Share → Embed a map */}
+                                        <iframe
+                                            title="Service Area Map"
+                                            src={T.mapSrc !== '{{MAP_EMBED_URL}}' ? T.mapSrc : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.11976383964024!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1708800000000!5m2!1sen!2sus'}
+                                            width="100%"
+                                            height="100%"
+                                            style={{ border: 0 }}
+                                            allowFullScreen
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* ── End Get In Touch ── */}
+
                     </div>
                 </section>
             );
@@ -499,36 +562,68 @@
         // ── Footer ─────────────────────────────────────────────────────────────
         // SECTION: FOOTER START
         const Footer = () => {
-            const links = [
+            const navLinks = [
                 { label: 'Services', href: '#services' },
                 { label: 'Why Us', href: '#why-us' },
                 { label: 'Reviews', href: '#reviews' },
                 { label: 'Contact', href: '#contact' },
             ];
+            const footerServices = [
+                'Residential Cleaning',
+                'Deep Cleaning',
+                'Move-In / Move-Out Cleaning',
+                '{{SERVICE_4}}',
+            ];
+            const serviceAreas = [
+                T.city,
+                '{{AREA_2}}',
+                '{{AREA_3}}',
+                '{{AREA_4}}',
+                '{{AREA_5}}',
+            ];
             return (
                 <footer className="bg-slate-900 text-slate-300 py-14" aria-label="Footer">
                     <div className="max-w-6xl mx-auto px-4 sm:px-6">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-                            <div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-10">
+                            {/* Brand — spans 2 cols on lg */}
+                            <div className="lg:col-span-2">
                                 <h3 className="font-heading font-bold text-white text-lg mb-2">{T.name}</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed">Professional residential cleaning services in {T.city}, {T.state}. Trusted, insured, and locally owned.</p>
+                                <p className="text-slate-400 text-sm leading-relaxed mb-4">Professional residential cleaning services in {T.city}, {T.state}. Trusted, insured, and locally owned.</p>
+                                <ul className="space-y-2">
+                                    <li><a href={'tel:' + T.phone} className="flex items-center gap-2 text-slate-400 text-sm hover:text-white transition"><IPhone />{T.phone}</a></li>
+                                    <li><a href={'mailto:' + T.email} className="flex items-center gap-2 text-slate-400 text-sm hover:text-white transition"><IMail />{T.email}</a></li>
+                                    <li className="text-slate-500 text-sm pl-1">{T.address}</li>
+                                </ul>
                             </div>
+                            {/* Navigation */}
                             <div>
                                 <h4 className="font-semibold text-white text-sm mb-4 tracking-wide uppercase">Navigation</h4>
                                 <ul className="space-y-2">
-                                    {links.map(l => (
+                                    {navLinks.map(l => (
                                         <li key={l.href}>
                                             <a href={l.href} className="text-slate-400 text-sm hover:text-white transition-colors" onClick={e => { e.preventDefault(); scrollTo(l.href); }}>{l.label}</a>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
+                            {/* Services */}
                             <div>
-                                <h4 className="font-semibold text-white text-sm mb-4 tracking-wide uppercase">Contact</h4>
-                                <ul className="space-y-3">
-                                    <li><a href={"tel:" + T.phone} className="flex items-center gap-2 text-slate-400 text-sm hover:text-white transition"><IPhone />{T.phone}</a></li>
-                                    <li><a href={"mailto:" + T.email} className="flex items-center gap-2 text-slate-400 text-sm hover:text-white transition"><IMail />{T.email}</a></li>
-                                    <li className="text-slate-500 text-sm">{T.city}, {T.state}</li>
+                                <h4 className="font-semibold text-white text-sm mb-4 tracking-wide uppercase">Services</h4>
+                                <ul className="space-y-2">
+                                    {footerServices.map(s => (
+                                        <li key={s}>
+                                            <a href="#services" className="text-slate-400 text-sm hover:text-white transition-colors" onClick={e => { e.preventDefault(); scrollTo('#services'); }}>{s}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            {/* Service Areas */}
+                            <div>
+                                <h4 className="font-semibold text-white text-sm mb-4 tracking-wide uppercase">Service Areas</h4>
+                                <ul className="space-y-2">
+                                    {serviceAreas.map(a => (
+                                        <li key={a} className="text-slate-400 text-sm">{a}</li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>
